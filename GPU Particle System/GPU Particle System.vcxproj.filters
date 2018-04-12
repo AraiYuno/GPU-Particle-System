@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{ce55ed1e-ce0f-46b2-a248-62d65dbb6358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{b5945374-a497-4280-9491-de5dd341b183}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Particle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
