@@ -85,6 +85,7 @@ void Renderer::update(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	this->renderParticles();
 	SDL_GL_SwapWindow(this->window);
+	this->particleSystem->update();
 	//get_fps();
 }
 
@@ -101,7 +102,7 @@ void Renderer::renderParticles(){
 		glDrawArrays(GL_TRIANGLE_STRIP, j, 4);
 		}*/
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		//glDrawArrays(GL_POINTS, 0, 3000);
+		//glDrawArrays(GL_POINTS, 0, 1000);
 	}
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);

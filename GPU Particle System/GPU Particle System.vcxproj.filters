@@ -7,6 +7,9 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{b5945374-a497-4280-9491-de5dd341b183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{6be9edbd-0d85-4976-85b6-2786e094bd4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,9 +27,6 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Particle.h">
@@ -41,8 +41,13 @@
     <ClInclude Include="Renderer.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Imports\Shaders\vertexShader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Imports\Shaders\fragmentShader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

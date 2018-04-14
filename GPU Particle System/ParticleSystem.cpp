@@ -1,9 +1,19 @@
 #include "ParticleSystem.h"
+#include <SDL.h>
+#include <algorithm>
 #include <SOIL.h>
 
 ParticleSystem::ParticleSystem(){
 	this->isInitiated = true;
 	this->setParticles();
+
+	//
+	this->gravity.x = 0, this->gravity.y = 8, this->gravity.z = 0;
+	this->friction = 0.0f;
+
+	int thisTime = SDL_GetTicks();
+	deltaTime = (float)(thisTime - lastTime) / 1200;
+	lastTime = thisTime;
 }
 
 void ParticleSystem::setParticles(){
@@ -27,25 +37,25 @@ void ParticleSystem::setParticles(){
 			if (r2 > 2.5f)
 				colour[i][j] = glm::vec4(0.0, 0.0, 0.0, r3);
 			else
-				colour[i][j] = glm::vec4(1.0, 1.0, 0, r3);
+				colour[i][j] = glm::vec4(1.0, 1.0, 0.0, r3);
 		}
 	}
 
-	//glm::vec2 tex[3000];
-	//glm::vec3 pos[3000];
-	//glm::vec4 colour[3000];
-	//float high = 5, low = -5;
-	//for (int i = 0; i < 3000; i++) {
-	//	float r1 = low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
-	//	float r2 = low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
-	//	float r3 = low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
-	//	pos[i] = glm::vec3(r1, r2, -35.0f - r1);
-	//	tex[i] = glm::vec2(r1, r3);
-	//	if (r2 > 2.5f)
-	//	colour[i] = glm::vec4(0.0, 0.0, 0.0, r1);
-	//	else
-	//	colour[i] = glm::vec4(1.0, 1.0, 0, r1);
-	//}
+	/*glm::vec2 tex[3000];
+	glm::vec3 pos[3000];
+	glm::vec4 colour[3000];
+	float high = 5, low = -5;
+	for (int i = 0; i < 3000; i++) {
+		float r1 = low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
+		float r2 = low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
+		float r3 = low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
+		pos[i] = glm::vec3(r1, r2, -35.0f - r1);
+		tex[i] = glm::vec2(r1, r3);
+		if (r2 > 2.5f)
+		colour[i] = glm::vec4(0.0, 0.0, 0.0, r1);
+		else
+		colour[i] = glm::vec4(1.0, 1.0, 0, r1);
+	}*/
 
 	GLuint posVBO;
 	GLuint texVBO;
@@ -56,7 +66,7 @@ void ParticleSystem::setParticles(){
 
 	glGenBuffers(1, &posVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, posVBO);
-	glBufferData(GL_ARRAY_BUFFER, /*3000*/ 4 * 80 * sizeof(glm::vec3), pos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, /*3000 */4 * 80 * sizeof(glm::vec3), pos, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 
@@ -77,6 +87,22 @@ void ParticleSystem::setParticles(){
 
 
 void ParticleSystem::update(){
-	for (std::vector<Particle>::iterator i = particles.begin(); i != particles.end(); ++i) 
+	int thisTime = SDL_GetTicks();
+	deltaTime = (float)(thisTime - lastTime) / 1200;
+	lastTime = thisTime;
+
+	for (std::vector<Particle>::iterator i = particles.begin(); i != particles.end(); ++i)
 		i->update();
+
+	for (std::vector<Particle>::iterator i = this->particles.begin(); i != this->particles.end();) {
+		i->position = computeEuler(i->position, i->velocity, i->acceleration + gravity, deltaTime);
+		i->velocity = computeVelocity(i->velocity, i->acceleration + gravity, deltaTime);
+		i->lifeSpan += deltaTime;
+		if (i->lifeSpan >= 1.7f)
+			i = this->particles.erase(i);
+		else ++i;
+	}
+
+	for (int i = 0; i < deltaTime * 3000; ++i) this->particles.push_back(Particle());
+	std::sort(this->particles.begin(), this->particles.end(), Particle::sortParticles);
 }
