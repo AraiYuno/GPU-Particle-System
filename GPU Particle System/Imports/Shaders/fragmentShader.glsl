@@ -7,11 +7,13 @@ in Vertex	{
 } IN;
 
 out vec4 gl_FragColor;
-uniform float colourVar;
+uniform float colourRedVar;
+uniform float colourGreenVar;
+uniform float colourBlueVar;
 
 void main(void)	{
 	vec4 texC = texture(tex0,IN.texCoord);
-	if (texC.rgb == vec3(0.0,0.0,0.0)) discard;
-	else gl_FragColor = (IN.colour - vec4(0.0,colourVar,0,0));
-	//else gl_FragColor = texC * IN.colour;
+	if (texC.rgb == vec3(0.0,0.0,0.0)) 
+		discard;
+	else gl_FragColor = (IN.colour - vec4(colourRedVar,1.0/colourGreenVar,colourBlueVar,0));
 }

@@ -38,15 +38,22 @@ string loadShader(const string &file_name){
 }
 
 
+float randomFloatBetween(float low, float high) {
+	return low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - (low))));
+}
 
-glm::vec3 computeVelocity(glm::vec3 u, glm::vec3 a, float t){
-	return (u + a * t);
+//===========================================================================
+// computeVelocity
+//   newV = v + a * t. to calcualte the new velocity after deltatime.
+//===========================================================================
+glm::vec3 computeVelocity(glm::vec3 _velocity, glm::vec3 _acceleration, float _deltaTime){
+	return (_velocity + _acceleration * _deltaTime);
 }
 
 //===========================================================================
 // computeEuler
-//   computes euler simply
+//   computes euler simply to return the new position of a particle.
 //===========================================================================
-glm::vec3 computeEuler(glm::vec3 s, glm::vec3 u, glm::vec3 a, float t){
-	return computeVelocity(s, computeVelocity(u, a, t), t);
+glm::vec3 computeEuler(glm::vec3 _position, glm::vec3 _velocity, glm::vec3 _acceleration, float _deltaTime){
+	return computeVelocity(_position, computeVelocity(_velocity, _acceleration, _deltaTime), _deltaTime);
 }

@@ -20,12 +20,14 @@ public:
 
 	ParticleSystem *particleSystem;
 	SDL_GLContext glContext;
-	GLint shaderModelMat;
-	GLint shaderViewMat;
-	GLint shaderProjMat;
-	GLint shaderOrthoMat;
-	GLint colourVariation;
-	GLint pFixed;
+	GLuint shaderModelMat;
+	GLuint shaderViewMat;
+	GLuint shaderProjMat;
+	GLuint shaderOrthoMat;
+	GLuint colourRedVar;
+	GLuint colourGreenVar;
+	GLuint colourBlueVar;
+	GLuint pFixed;
 	glm::mat4 perspective;
 	glm::mat4 ortho;
 	int numFrames;
