@@ -1,2 +1,4 @@
-﻿  ParticleSystem.cpp
+﻿  Renderer.cpp
+c:\users\owner\desktop\project\gpu particle system\renderer.cpp(25): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+  GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GPU Particle System.vcxproj -> C:\Users\Owner\Desktop\Project\Debug\GPU Particle System.exe

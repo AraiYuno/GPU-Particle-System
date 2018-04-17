@@ -24,7 +24,7 @@ void ParticleSystem::setParticles(){
 	glm::vec3 position[80][4];
 	glm::vec4 colour[80][4];
 	float high = 2, low = -2;
-	for (int i = 0; i < 80; i++) {
+	for (int i = 0; i < 4; i++) {
 		float t1 = randomFloatBetween(0.f, 0.225f);
 		float t2 = randomFloatBetween(0.f, 0.225f);
 		float t3 = randomFloatBetween(0.f, 0.225f);
@@ -36,8 +36,9 @@ void ParticleSystem::setParticles(){
 			float r1 = randomFloatBetween(low, high);
 			float r2 = randomFloatBetween(low, high);
 			float r3 = randomFloatBetween(0, 1);
-			position[i][j] = glm::vec3(r1, r2, -45.0f - r1);
-			colour[i][j] = glm::vec4(1.0, 1.0, 0.0, r3);
+			float r4 = randomFloatBetween(-40.f, -50.f);
+			position[i][j] = glm::vec3(r1, r2, r4 );
+			colour[i][j] = glm::vec4(1.0, 1.0, 0.0, isInBetween(r4));
 		}
 	}
 
@@ -72,7 +73,7 @@ void ParticleSystem::setParticles(){
 
 	glGenBuffers(1, &colourVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, colourVBO);
-	glBufferData(GL_ARRAY_BUFFER, /*3000*/ 4 * 80 * sizeof(glm::vec4), colour, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, /*3000*/  4 * 80 * sizeof(glm::vec4), colour, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(1);
 

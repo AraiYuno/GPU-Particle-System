@@ -22,7 +22,7 @@ void Renderer::initiate(){
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
-	glClearColor(0.5, 0.5, 0.5, 1);
+	glClearColor(0.1, 0.1, 0.1, 1);
 	setShaders();
 }
 
@@ -87,7 +87,6 @@ void Renderer::update(){
 	this->renderParticles();
 	SDL_GL_SwapWindow(this->window);
 	this->particleSystem->update();
-	//get_fps();
 }
 
 void Renderer::renderParticles(){
@@ -108,9 +107,9 @@ void Renderer::renderParticles(){
 			glUniform1f(this->colourRedVar, (float)i->lifeSpan / -1.35f);
 			glUniform1f(this->colourBlueVar, 0);
 		}
-		for (int j = 0; j < 60; j++) {
+		for (int j = 0; j < 80; j++) {
 		if( j % 4 == 0)
-		glDrawArrays(GL_TRIANGLE_STRIP, j, 4);
+			glDrawArrays(GL_TRIANGLE_STRIP, j, 4);
 		}
 		//glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		//glDrawArrays(GL_POINTS, 0, 3000);
